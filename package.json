@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node --require dotenv/config -r esm index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/malcodeman/birthday-bot/issues"
   },
-  "homepage": "https://github.com/malcodeman/birthday-bot#readme"
+  "homepage": "https://github.com/malcodeman/birthday-bot#readme",
+  "dependencies": {
+    "@notionhq/client": "^0.4.4",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25"
+  }
 }
