@@ -3,17 +3,19 @@ import { App } from "@slack/bolt";
 import * as R from "ramda";
 import { isToday, parseISO } from "date-fns";
 
+import constants from "./constants";
+
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: constants.NOTION_TOKEN,
 });
 const slack = new App({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  token: process.env.SLACK_BOT_TOKEN,
+  signingSecret: constants.SLACK_SIGNING_SECRET,
+  token: constants.SLACK_BOT_TOKEN,
 });
 
 async function getBirthdayUsers() {
   const notionUsers = await notion.databases.query({
-    database_id: "c5aba6d2ffb741d7a02a65919818e555",
+    database_id: constants.NOTION_DATABASE_ID,
   });
   const birthdayUsers = R.filter(
     (item) => isToday(parseISO(item.properties.birthday.date.start)),
@@ -44,7 +46,7 @@ async function getSlackUsers() {
 async function postMessage(text) {
   return await slack.client.chat.postMessage({
     text,
-    channel: process.env.SLACK_CHANNEL_ID,
+    channel: constants.SLACK_CHANNEL_ID,
   });
 }
 
