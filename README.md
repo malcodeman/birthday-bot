@@ -21,3 +21,29 @@ SLACK_SIGNING_SECRET
 SLACK_BOT_TOKEN
 SLACK_CHANNEL_ID
 ```
+
+Slack app manifest
+
+```
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: Birthday App
+features:
+  bot_user:
+    display_name: birthdaybot
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - chat:write.public
+      - users:read
+      - users:read.email
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
+```
