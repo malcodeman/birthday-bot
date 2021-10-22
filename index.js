@@ -4,6 +4,7 @@ import * as R from "ramda";
 import { isToday, parseISO } from "date-fns";
 
 import constants from "./constants";
+import messages from "./messages.json";
 
 const notion = new Client({
   auth: constants.NOTION_TOKEN,
@@ -50,6 +51,11 @@ async function postMessage(text) {
   });
 }
 
+function getMessage(userId) {
+  const text = messages[Math.floor(Math.random() * messages.length)].text;
+  return R.replace("<@MENTION>", `<@${userId}>`, text);
+}
+
 async function main() {
   const birthdayUsers = await getBirthdayUsers();
   const slackUsers = await getSlackUsers();
@@ -60,7 +66,7 @@ async function main() {
       slackUsers
     );
     if (R.not(R.isNil(slackUser))) {
-      postMessage(`Happy b-day <@${slackUser.id}>`);
+      postMessage(getMessage(slackUser.id));
     }
   }, birthdayUsers);
 }
