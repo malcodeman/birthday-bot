@@ -37,7 +37,6 @@ features:
 oauth_config:
   scopes:
     bot:
-      - commands
       - chat:write
       - chat:write.public
       - users:read
