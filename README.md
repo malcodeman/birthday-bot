@@ -46,3 +46,7 @@ settings:
   socket_mode_enabled: false
   token_rotation_enabled: false
 ```
+
+## License
+
+[MIT](./LICENSE)
